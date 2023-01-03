@@ -10,21 +10,6 @@ import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 
-import User from "./models/User.js";
-import {
-  dataAffiliateStat,
-  dataOverallStat,
-  dataProduct,
-  dataProductStat,
-  dataTransaction,
-  dataUser,
-} from "./data/index.js";
-import Product from "./models/Product.js";
-import ProductStat from "./models/ProductStat.js";
-import Transaction from "./models/Transaction.js";
-import OverallStat from "./models/OverallStat.js";
-import AffiliateStat from "./models/Affiliate.js";
-
 /* CONFIG */
 dotenv.config();
 const app = express();
@@ -44,6 +29,7 @@ app.use("/sales", salesRoutes);
 
 const PORT = process.env.PORT || 9000;
 mongoose
+  .set("strictQuery", false)
   .connect(process.env.MONGO_URL)
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
